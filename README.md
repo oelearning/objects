@@ -94,3 +94,70 @@ let user = {
 ```
 
 This is called a "trailing" o "hanging" comma. Makes it easier to add/remove/move around properties, because all lines become alike.
+
+## Square brackets
+
+For multiword properties, the dot access doesn't work 
+
+```
+// this would give a syntax error
+user.likes birds = true
+```
+
+JavaScript doesn't understand that. It thinks that we address `user.likes` and then gives a syntax error.
+
+The dot requires the key to be a valid variable identifier. That implies: contains no spaces, doesn't start with a digit and doesn't include special characters (`$` and `_`are allowed).
+
+There's and alternative "square bracket notation" that works with any string:
+
+```
+let user = {}
+
+// set
+user["likes birds"] = true;
+
+// get
+console.log(user["likes birds"]);
+
+// delete
+delete user["likes birds"];
+```
+
+Now everything is fine, please note that the string inside the brackets is properly quoted (any type of quotes will do).
+
+Square brackets also provide a way to obtain the property name as the result of any expression - as opposed to a literal string - like from a variable as follows:
+
+```
+let key = "likes birds";
+
+// same as user["likes birds"] = true;
+user[key] = true;
+```
+
+Here, the variable `key` may be calculated at run-time or depend on the user input. and then we use it to access the property. That gives us a great deal of flexibility.
+
+For instance:
+
+```
+let user = {
+  name: "John",
+  age: 30
+};
+
+let key = prompt("What do you want to know about the user?", "name");
+
+// access by variable
+alert( user[key] ); // John (if enter "name")
+```
+
+The dot notation cannot be use in a similar way
+
+```
+let user = {
+  name: "John",
+  age: 30
+};
+
+let key = "name";
+alert( user.key ) // undefined
+```
