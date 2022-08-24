@@ -97,7 +97,7 @@ This is called a "trailing" o "hanging" comma. Makes it easier to add/remove/mov
 
 ## Square brackets
 
-For multiword properties, the dot access doesn't work 
+For multiword properties, the dot access doesn't work
 
 ```
 // this would give a syntax error
@@ -161,3 +161,46 @@ let user = {
 let key = "name";
 alert( user.key ) // undefined
 ```
+
+## Computed properties
+
+We can use square brackets in an object literal, when creating an object. That's called `computed properties`.
+
+For instance:
+
+```
+let fruit = prompt("Which fruit to buy?", "apple");
+
+let bag = {
+  [fruit]: 5, // the name of the property is taken from the variable fruit
+};
+
+alert( bag.apple ); // 5 if fruit="apple"
+```
+
+The meaning of a computed property is simple: `[fruit]` means that the property name should be taken from `fruit`.
+
+So if a visitor enters `"apple"`, `bag` will become `{apple: 5}`.
+
+Essentially, that works the same as:
+
+```
+let fruit = prompt("Which fruit to buy?", "apple");
+let bag = {};
+
+// take property name from the fruit variable
+bag[fruit] = 5;
+```
+
+But looks easier, we can use more complex expressions inside square brackets:
+
+```
+let fruit = 'apple';
+let bag = {
+  [fruit + 'Computers']: 5 // bag.appleComputers = 5
+};
+```
+
+Square brackets are much more powerful than dot notation. They allow any property names and variables. But they are also more cumbersome to write.
+
+So most of the time, when property names are known and simple, the dot is used. And if we need something more complex, then we switch to square brackets.
