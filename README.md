@@ -245,3 +245,42 @@ let user = {
   age: 30 // normal way
 }
 ```
+
+## Property names limitations
+
+As we already know, a variable cannot have a name equal to one of the language-reserved words like "for", "let", "return", etc.
+
+But for an object property, there's no such restriction:
+
+```
+// these properties are all right
+let obj = {
+  for: 1,
+  let: 2,
+  return: 3
+}
+
+console.log(obj.for + obj.let + obj.return)
+```
+
+In short, there are no limitations on property names. They can be any string or symbols.
+
+`Other types are automatically converted to strings`.
+
+For instance, a number `0` becomes a string `"0"` when used as a property key
+
+```
+let obj = {
+  0: "test" // same as "0": "test"
+}
+```
+
+There's a minor gotcha with a special property named `__proto__`. We can't set it to a non-object value:
+
+```
+let obj = {}
+obj.__proto__ = 5 // assign a number
+console.log(obj.__proto__) // [object Object] - the value is an object, didn't work as intended
+```
+
+As we see from the code, the assignment to a primitive '5' is ignored
